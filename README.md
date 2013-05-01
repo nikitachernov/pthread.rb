@@ -2,6 +2,8 @@
 
 Module Pthread provides possibility for Ruby to run pieces of code in parallel using additional Unix processes on the same or other machines in the network.
 
+[![Build Status](https://travis-ci.org/nikitachernov/Pthread.png)](https://travis-ci.org/nikitachernov/Pthread)
+
 ## Installation
 
 Add this line to your application's Gemfile:
