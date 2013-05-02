@@ -34,13 +34,13 @@ or
 
 Methods #add_executor and #add_executors take an optional parameter that specifies a queue name.
 
-In order to connect an executor from a separate machine in your programm you can call
+In order to connect an executor from a separate machine in your programm you can call:
 
     PthreadExecutor.new '192.168.1.100:12345', 'tasks'
 
 specifing the host and a desired queue.
 
-Now you can spawn Pthreads in gain multicore performance by providing name of the queue, code to be executed and context variables:
+Now you can spawn Pthreads in order to gain multicore performance by providing name of the queue, code to be executed and context variables:
 
     Pthread::Pthread.new queue: 'tasks', code: %{
       x ** 2
