@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['nikita.cernovs@gmail.com']
   spec.description   = %q{Parallel threads in Ruby using dRb}
   spec.summary       = %q{Parallel threads in Ruby}
-  spec.homepage      = ''
+  spec.homepage      = 'http://nikitachernov.github.io/Pthread'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
