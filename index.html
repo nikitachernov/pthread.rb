@@ -58,7 +58,7 @@
 
 <p>Before using parallel threads you should configure a dRb server:</p>
 
-<p>Pthread::Pthread.start_service 'localhost:12345'</p>
+<pre><code>Pthread::Pthread.start_service '192.168.1.100:12345'</code></pre>
 
 <p>Pthreads are actual Unix processes. You can add process-workers on the same machine as the main programm by calling:</p>
 
@@ -74,7 +74,7 @@
 
 <p>In order to connect an executor from a separate machine in your programm you can call:</p>
 
-<pre><code>PthreadExecutor.new '192.168.1.100:12345', 'tasks'
+<pre><code>Pthread::PthreadExecutor.new '192.168.1.100:12345', 'tasks'
 </code></pre>
 
 <p>specifing the host and a desired queue.</p>
