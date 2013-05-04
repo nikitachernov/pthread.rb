@@ -6,14 +6,14 @@ class Pthread::PthreadExecutor
     ts = DRbObject.new_with_uri("druby://#{host}")
 
     loop do
-      pthread_id, _, code, context = ts.take([ /_s/, queue, nil, nil])
+      pthread_id, _, code, context = ts.take([nil, queue, nil, nil])
 
       context && context.each do |a, v|
         singleton_class.class_eval { attr_accessor a }
         self.send("#{a}=", context[a])
       end
 
-      ts.write(["#{pthread_id[0..-3]}_r", eval(code)])
+      ts.write([pthread_id, eval(code)])
     end
   rescue DRb::DRbConnError
     exit 0

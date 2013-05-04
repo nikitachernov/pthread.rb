@@ -22,7 +22,7 @@ Or install it yourself as:
 
 Before using parallel threads you should configure a dRb server:
 
-  Pthread::Pthread.start_service 'localhost:12345'
+    Pthread::Pthread.start_service 'localhost:12345'
 
 Pthreads are actual Unix processes. You can add process-workers on the same machine as the main programm by calling:
 

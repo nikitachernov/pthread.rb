@@ -22,10 +22,10 @@ class Pthread::Pthread
   end
 
   def initialize(job)
-    @@ts.write(["#{self.object_id}_s", job[:queue], job[:code], job[:context]])
+    @@ts.write([self.object_id, job[:queue], job[:code], job[:context]])
   end
 
   def value
-    @@ts.take(["#{self.object_id}_r", nil])[1]
+    @@ts.take([self.object_id, nil])[1]
   end
 end
