@@ -2,17 +2,17 @@ require 'spec_helper'
 
 describe Pthread::Pthread do
 
+  before(:all) do
+    Pthread::Pthread.start_service 'localhost:54321'
+    Pthread::Pthread.add_executor 'tasks'
+  end
+
   let(:x) { 5 }
 
   let(:pthread) do
     Pthread::Pthread.new queue: 'tasks', code: %{
       25 / x
     }, context: { x: x }
-  end
-
-  before do
-    Pthread::Pthread.start_service 'localhost:54321'
-    Pthread::Pthread.add_executor 'tasks'
   end
 
   context 'without exceptions' do

@@ -24,6 +24,7 @@ class Pthread::Pthread
 
   def self.kill_executors
     Process.kill 'HUP', *@@pids
+    @@pids = []
   end
 
   def initialize(job)
