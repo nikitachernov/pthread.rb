@@ -58,7 +58,8 @@
 
 <p>Before using parallel threads you should configure a dRb server:</p>
 
-<pre><code>Pthread::Pthread.start_service '192.168.1.100:12345'</code></pre>
+<pre><code>Pthread::Pthread.start_service '192.168.1.100:12345'
+</code></pre>
 
 <p>Pthreads are actual Unix processes. You can add process-workers on the same machine as the main programm by calling:</p>
 
@@ -88,19 +89,21 @@
 
 <p>When you need to get the value back simple call</p>
 
-<pre><code>pthread.value # => 25
+<pre><code>pthread.value # =&gt; 25
 </code></pre>
 
-<h2>Exceptions</h2>
+<h3>Exceptions</h3>
 
-<p>If exception is raised inside a pthread in doesn't affect the whole process. Exception is raise by accesing pthread's value.</p>
+<p>If exception is raised inside a pthread in doesn't affect the whole process.
+Exception is raise by accesing pthread's value.</p>
 
-<pre><code>pthread.value # => raise exception
+<pre><code>pthread.value # =&gt; raise exception
 </code></pre>
 
-<h2>Stop executors</h2>
+<h3>Stop executors</h3>
 
 <p>To stop executors on the server machine simply run</p>
+
 <pre><code>Pthread::Pthread.kill_executors
 </code></pre>
 
