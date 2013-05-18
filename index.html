@@ -81,9 +81,27 @@
 
 <p>Now you can spawn Pthreads in order to gain multicore performance by providing name of the queue, code to be executed and context variables:</p>
 
-<pre><code>Pthread::Pthread.new queue: 'tasks', code: %{
+<pre><code>pthread = Pthread::Pthread.new queue: 'tasks', code: %{
   x ** 2
 }, context: { x: 5 }
+</code></pre>
+
+<p>When you need to get the value back simple call</p>
+
+<pre><code>pthread.value # => 25
+</code></pre>
+
+<h2>Exceptions</h2>
+
+<p>If exception is raised inside a pthread in doesn't affect the whole process. Exception is raise by accesing pthread's value.</p>
+
+<pre><code>pthread.value # => raise exception
+</code></pre>
+
+<h2>Stop executors</h2>
+
+<p>To stop executors on the server machine simply run</p>
+<pre><code>Pthread::Pthread.kill_executors
 </code></pre>
 
 <h2>Contributing</h2>
