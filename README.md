@@ -42,9 +42,19 @@ specifing the host and a desired queue.
 
 Now you can spawn Pthreads in order to gain multicore performance by providing name of the queue, code to be executed and context variables:
 
-    Pthread::Pthread.new queue: 'tasks', code: %{
+    pthread = Pthread::Pthread.new queue: 'tasks', code: %{
       x ** 2
     }, context: { x: 5 }
+
+When you need to get the value back simple call
+
+    pthread.value # => 25
+
+### Exceptions
+If exception is raised inside a pthread in doesn't affect the whole process.
+Exception is raise by accesing pthread's value.
+
+    pthread.value # => raise exception
 
 ## Contributing
 

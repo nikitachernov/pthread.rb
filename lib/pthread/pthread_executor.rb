@@ -13,7 +13,13 @@ class Pthread::PthreadExecutor
         self.send("#{a}=", context[a])
       end
 
-      ts.write([pthread_id, eval(code)])
+      value = begin
+        eval(code)
+      rescue => e
+        e
+      end
+
+      ts.write([pthread_id, value])
     end
   rescue DRb::DRbConnError
     exit 0

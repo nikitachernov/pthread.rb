@@ -26,6 +26,12 @@ class Pthread::Pthread
   end
 
   def value
-    @@ts.take([self.object_id, nil])[1]
+    raw_value.is_a?(StandardError) ? raise(raw_value) : raw_value
+  end
+
+private
+
+  def raw_value
+    @raw_value ||= @@ts.take([self.object_id, nil])[1]
   end
 end
