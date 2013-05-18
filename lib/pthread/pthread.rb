@@ -1,7 +1,8 @@
 require 'rinda/tuplespace'
 
 class Pthread::Pthread
-  @@ts = Rinda::TupleSpace.new
+  @@ts  = Rinda::TupleSpace.new
+  @@pids = []
 
   def self.start_service(host)
     @@host = host
@@ -10,7 +11,7 @@ class Pthread::Pthread
 
   def self.add_executors(count = 1, queue=nil)
     count.times do
-      fork do
+      @@pids << fork do
         DRb.stop_service
         Pthread::PthreadExecutor.new(@@host, queue)
       end
@@ -19,6 +20,10 @@ class Pthread::Pthread
 
   def self.add_executor(queue=nil)
     add_executors(1, queue)
+  end
+
+  def self.kill_executors
+    Process.kill 'HUP', *@@pids
   end
 
   def initialize(job)

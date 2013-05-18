@@ -11,7 +11,7 @@ describe Pthread::Pthread do
   end
 
   before do
-    Pthread::Pthread.start_service 'localhost:12345'
+    Pthread::Pthread.start_service 'localhost:54321'
     Pthread::Pthread.add_executor 'tasks'
   end
 
@@ -31,5 +31,9 @@ describe Pthread::Pthread do
     it 'should raise error on value access' do
       expect { pthread.value }.to raise_error ZeroDivisionError
     end
+  end
+
+  after(:all) do
+    Pthread::Pthread.kill_executors
   end
 end

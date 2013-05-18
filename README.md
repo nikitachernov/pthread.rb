@@ -56,6 +56,11 @@ Exception is raise by accesing pthread's value.
 
     pthread.value # => raise exception
 
+### Stop executors
+To stop executors on the server machine simply run
+
+    Pthread::Pthread.kill_executors
+
 ## Contributing
 
 1. Fork it
