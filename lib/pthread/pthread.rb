@@ -34,7 +34,7 @@ module Pthread
       count.times do
         @@pids << fork do
           DRb.stop_service
-          Pthread::PthreadExecutor.new(@@host, queue)
+          PthreadExecutor.new(@@host, queue)
         end
       end
     end
