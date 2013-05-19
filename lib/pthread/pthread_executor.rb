@@ -8,10 +8,10 @@ module Pthread
 
     # Initliazes new executor.
     #
-    # @param [ String ] DRB host that has main programm running
-    # @param [ String, Symbol ] optinal queue name to attach executor
+    # @param [ String ] host DRB host that has main programm running.
+    # @param [ String, Symbol ] queue optinal queue name to attach executor.
     #
-    # @example Connect to remote Drb service
+    # @example Connect to remote dRb service
     #   Pthread::PthreadExecutor.new '192.168.1.100:12345', :tasks
     def initialize(host, queue=nil)
       DRb.start_service

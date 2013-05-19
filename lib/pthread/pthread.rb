@@ -4,15 +4,15 @@ module Pthread
 
   # The +Pthread+ class is the main class that users work with.
   # It used for creating forks to be executed in a separate processes
-  # including other machines
+  # including on remote machines.
   class Pthread
 
     @@ts   = Rinda::TupleSpace.new
     @@pids = []
 
-    # Starts the drb server
+    # Starts the drb server.
     #
-    # @param [ String ] that contains host url and port
+    # @param [String] host that contains host url and port.
     #
     # @example Start service
     #   Pthread::Pthread.start_service '192.168.1.100:12345'
@@ -21,16 +21,15 @@ module Pthread
       DRb.start_service("druby://#{@@host}", @@ts)
     end
 
-    # Adds executors on the same machine as the main programm
+    # Adds executors on the same machine as the main programm.
     #
-    # @param [ FixNum ] amount of executors to start
-    # @param [ Symbol, String ] name of the queue for executors to be attached to
+    # @param [FixNum] count amount of executors to start.
+    # @param [Symbol, String] queue name of the queue for executors to be attached to.
     #
     # @example Add executors without a queue
     #   Pthread::Pthread.add_executors 5
     # @example Add executors for specific queue
     #   Pthread::Pthread.add_executors 5, :tasks
-
     def self.add_executors(count = 1, queue=nil)
       count.times do
         @@pids << fork do
@@ -40,19 +39,19 @@ module Pthread
       end
     end
 
-    # Adds a single executor on the same machine as the main programm
+    # Adds a single executor on the same machine as the main programm.
     #
-    # @param [ Symbol, String ] name of the queue for executor to be attached to
+    # @param [Symbol, String] queue name of the queue for executor to be attached to.
     #
-    # @example Add executor without a queue
+    # @example Add an executor without a queue
     #   Pthread::Pthread.add_executor
-    # @example Add executor for specific queue
+    # @example Add an executor for a specific queue
     #   Pthread::Pthread.add_executor, :tasks
     def self.add_executor(queue=nil)
       add_executors(1, queue)
     end
 
-    # Kills all launched executors on this machine
+    # Kills all launched executors on this machine.
     #
     # @example Add executors without a queue
     #   Pthread::Pthread.kill_executors
@@ -61,9 +60,9 @@ module Pthread
       @@pids = []
     end
 
-    # Initializes new pthread and schedules execution of the job
+    # Initializes new pthread and schedules execution of the job.
     #
-    # @param [ Hash ] should containt :code, :context and optionally :queue
+    # @param [Hash] job should contain :code, :context and optionally :queue
     # 
     # @example Initialize new parrallel job
     #   pthread = Pthread::Pthread.new queue: 'tasks', code: %{
@@ -74,25 +73,26 @@ module Pthread
     end
 
 
-    # Returns value of a pthread
+    # Returns value of a pthread.
     #
-    # @note If value if not yet calculated will block the execution
-    # @note If pthread resulted in an exception it will be raised
+    # @note If value is not yet calculated it will block the execution.
+    # @note If pthread resulted in an exception it will be raised.
     #
-    # @example pthread.value
+    # @example
+    #  pthread.value
     #
-    # @return [ Object ] value of a pthread
+    # @return [Object] value of a pthread.
     def value
       raw_value.is_a?(StandardError) ? raise(raw_value) : raw_value
     end
 
   private
 
-    # Returns raw value of a pthread even if it was an exception
+    # Returns raw value of a pthread even if it was an exception.
     #
-    # @note If value if not yet calculated will block the execution
+    # @note If value is not yet calculated will block the execution.
     #
-    # @return [ Object ] raw value of a pthread    
+    # @return [Object] raw value of a pthread.
     def raw_value
       @raw_value ||= @@ts.take([self.object_id, nil])[1]
     end
